@@ -2,6 +2,11 @@ package yating_tts;
 
 import org.json.JSONObject;
 
+import yating_tts.constants.AudioEncoding;
+import yating_tts.constants.AudioSampleRate;
+import yating_tts.constants.InputType;
+import yating_tts.constants.VoiceModel;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;

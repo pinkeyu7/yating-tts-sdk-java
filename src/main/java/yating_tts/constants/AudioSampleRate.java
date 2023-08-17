@@ -1,14 +1,14 @@
-package yating_tts;
+package yating_tts.constants;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class InputType {
-    public static final String Text = "text";
-    public static final String Ssml = "ssml";
+public class AudioSampleRate {
+    public static final String SR16k = "16K";
+    public static final String SR22k = "22K";
 
     static List<String> getList() {
-        String[] valueList = new String[] { Text, Ssml };
+        String[] valueList = new String[] { SR16k, SR22k };
         return Arrays.asList(valueList);
     }
 

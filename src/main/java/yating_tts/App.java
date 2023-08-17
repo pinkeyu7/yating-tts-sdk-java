@@ -1,5 +1,10 @@
 package yating_tts;
 
+import yating_tts.constants.AudioEncoding;
+import yating_tts.constants.AudioSampleRate;
+import yating_tts.constants.InputType;
+import yating_tts.constants.VoiceModel;
+
 public class App {
     public static void main(String[] args) throws Exception {
         String ttsApiUrl = "TTS_ENDPOINT";

@@ -1,4 +1,4 @@
-package yating_tts;
+package yating_tts.constants;
 
 import java.util.Arrays;
 import java.util.List;
