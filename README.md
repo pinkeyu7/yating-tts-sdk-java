@@ -13,7 +13,10 @@
         "type": "text"
     },
     "voice": {
-        "model": "zh_en_female_1"
+        "model": "zh_en_female_1",
+        "speed": 1,
+        "pitch": 1,
+        "energy": 1
     },
     "audioConfig": {
         "encoding": "LINEAR16",
@@ -31,13 +34,25 @@
 | text | Recognize input.text as pure text.   |
 | ssml | Recognize input.text in ssml format. |
 
+### Voice Setting
+
+| Name   | Type   | Value Limit  | Description                      |
+| ------ | ------ | :----------: | -------------------------------- |
+| model  | string | Table bellow | Voice Model                      |
+| speed  | float  |  0.5 - 1.5   | Voice Speed, faster slower       |
+| pitch  | float  |  0.5 - 1.5   | Voice Pitch, higher or lower     |
+| energy | float  |  0.5 - 1.5   | Voice Energy, stronger or weaker |
+
 ### Voice Model
 
 | Name           | Sample Rate | Description                       |
 | -------------- | ----------- | --------------------------------- |
-| zh_en_female_1 | 16k         | Yating speak Mandarin and English |
-| zh_en_female_2 | 16k         | Yiqing speak Mandarin and English |
-| zh_en_male_1   | 16k         | Jiahao speak Mandarin and English |
+| zh_en_female_1 | 16k,22k     | Yating speak Mandarin and English |
+| zh_en_female_2 | 16k,22k     | Yiqing speak Mandarin and English |
+| zh_en_male_1   | 16k,22k     | Jiahao speak Mandarin and English |
+| tai_female_1   | 16k         | Yating speak Taiwanese            |
+| tai_female_2   | 16k         | Yiqing speak Taiwanese            |
+| tai_male_1     | 16k         | Jiahao speak Taiwanese            |
 
 ### Encoding Format
 
@@ -51,3 +66,4 @@
 | Name | Description            |
 | ---- | ---------------------- |
 | 16K  | Sampling rate in 16khz |
+| 22K  | Sampling rate in 22khz |
