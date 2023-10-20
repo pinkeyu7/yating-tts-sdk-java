@@ -6,6 +6,9 @@ import yating_tts.constants.AudioEncoding;
 import yating_tts.constants.AudioSampleRate;
 import yating_tts.constants.InputType;
 import yating_tts.constants.VoiceModel;
+import yating_tts.constants.VoiceSpeed;
+import yating_tts.constants.VoicePitch;
+import yating_tts.constants.VoiceEnergy;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,15 +28,19 @@ public class TtsClient {
         ttsApiKey = key;
     }
 
-    public void Synthesize(String inputText, String inputType, String voiceModel, String audioEncoding,
-            String audioSampleRate, String fileName) throws Exception {
+    public void Synthesize(String inputText, String inputType,
+            String voiceModel, Double voiceSpeed, Double voicePitch, Double voiceEnergy,
+            String audioEncoding, String audioSampleRate,
+            String fileName)
+            throws Exception {
 
         try {
             // parameter validation
-            validation(inputType, voiceModel, audioEncoding, audioSampleRate);
+            validation(inputType, voiceModel, voiceSpeed, voicePitch, voiceEnergy, audioEncoding, audioSampleRate);
 
             // mapping http request body
-            String bodyString = bodyGenerator(inputText, inputType, voiceModel, audioEncoding, audioSampleRate);
+            String bodyString = bodyGenerator(inputText, inputType, voiceModel, voiceSpeed, voicePitch, voiceEnergy,
+                    audioEncoding, audioSampleRate);
 
             // send http post request
             JSONObject responseBody = sendHttpRequest(bodyString);
@@ -49,7 +56,8 @@ public class TtsClient {
         }
     }
 
-    private static void validation(String inputType, String voiceModel, String audioEncoding,
+    private static void validation(String inputType, String voiceModel, Double voiceSpeed, Double voicePitch,
+            Double voiceEnergy, String audioEncoding,
             String audioSampleRate) throws Exception {
         if (!InputType.validate(inputType)) {
             throw new Exception("inputType: " + inputType + " is not allowed.");
@@ -60,16 +68,29 @@ public class TtsClient {
         if (!AudioEncoding.validate(audioEncoding)) {
             throw new Exception("audioEncoding: " + audioEncoding + " is not allowed.");
         }
-        if (!AudioSampleRate.validate(audioSampleRate)) {
+        if (!AudioSampleRate.validate(voiceModel, audioSampleRate)) {
             throw new Exception("audioSampleRate: " + audioSampleRate + " is not allowed.");
+        }
+
+        if (!VoiceSpeed.validate(voiceSpeed)) {
+            throw new Exception("voiceSpeed: " + voiceSpeed + " out of range.");
+        }
+        if (!VoicePitch.validate(voicePitch)) {
+            throw new Exception("voicePitch: " + voicePitch + " out of range.");
+        }
+        if (!VoiceEnergy.validate(voiceEnergy)) {
+            throw new Exception("voiceEnergy: " + voiceEnergy + " out of range.");
         }
     }
 
-    private static String bodyGenerator(String inputText, String inputType, String voiceModel, String audioEncoding,
+    private static String bodyGenerator(String inputText, String inputType, String voiceModel, Double voiceSpeed,
+            Double voicePitch, Double voiceEnergy, String audioEncoding,
             String audioSampleRate) {
         return new JSONObject()
                 .put("input", new JSONObject().put("text", inputText).put("type", inputType))
-                .put("voice", new JSONObject().put("model", voiceModel))
+                .put("voice",
+                        new JSONObject().put("model", voiceModel).put("speed", voiceSpeed).put("pitch", voicePitch)
+                                .put("energy", voiceEnergy))
                 .put("audioConfig", new JSONObject().put("encoding", audioEncoding).put("sampleRate", audioSampleRate))
                 .toString();
     }

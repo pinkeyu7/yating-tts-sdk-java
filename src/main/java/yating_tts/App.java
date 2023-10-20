@@ -12,7 +12,10 @@ public class App {
 
         String inputText = "歡迎使用雅婷文字轉語音。";
         String inputType = InputType.Text;
-        String voiceModel = VoiceModel.Female1;
+        String voiceModel = VoiceModel.ZhEnFemale1;
+        Double voiceSpeed = 1.0;
+        Double voicePitch = 1.0;
+        Double voiceEnergy = 1.0;
         String audioEncoding = AudioEncoding.Linear16;
         String audioSampleRate = AudioSampleRate.SR16k;
         String fileName = "example";
@@ -20,7 +23,9 @@ public class App {
         TtsClient client = new TtsClient(ttsApiUrl, ttsApiKey);
 
         try {
-            client.Synthesize(inputText, inputType, voiceModel, audioEncoding, audioSampleRate, fileName);
+            client.Synthesize(inputText, inputType, voiceModel, voiceSpeed, voicePitch, voiceEnergy, audioEncoding,
+                    audioSampleRate,
+                    fileName);
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
         }
