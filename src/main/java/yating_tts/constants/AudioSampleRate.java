@@ -15,6 +15,9 @@ public class AudioSampleRate {
             case VoiceModel.ZhEnMale1:
                 valueList = new String[] { SR16k, SR22k };
                 break;
+            case VoiceModel.ZhEnMale2:
+                valueList = new String[] { SR22k };
+                break;
             case VoiceModel.TaiFemale1:
             case VoiceModel.TaiFemale2:
             case VoiceModel.TaiMale1:
